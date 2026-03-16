@@ -1,0 +1,40 @@
+# 推理独立配置（仅用于 python -m src.inference 单独跑推理时）
+# 与 main.py 不同：main.py 使用 autodrive.yaml，本文件仅供独立推理
+infer:
+  device: cuda   # cuda 或 cpu
+  ckpt: models/best_model.pth   # 模型权重路径，与 autodrive.yaml 的 infer.ckpt 保持一致
+  infer_hz: 10.0
+  send_hz: 20.0
+  frame_stride: 3   # 30fps 每3帧取1 => 10Hz
+  max_idle_sec: 1.0 # 相机超时则输出安全命令
+
+camera:
+  sensor_id: 0
+  width: 640
+  height: 360
+  fps: 30
+  flip_method: 2
+  capture_width: 1920
+  capture_height: 1080
+
+# 推理模式：MCU 不发送数据，串口仅用于 Jetson->MCU 下发控制
+# uart: 同一个串口，只写不发
+uart:
+  port: /dev/ttyCH341USB0
+  baudrate: 115200
+  timeout: 0.02
+
+# 后处理（与 autodrive.yaml 一致）
+postprocess:
+  steer_alpha: 0.3
+  throttle_alpha: 0.2
+  steer_deadband: 0.03
+  max_abs_steer: 0.6
+  max_throttle: 0.25
+  target_valid_threshold: 0.45
+  brake_on_threshold: 0.65
+  brake_off_threshold: 0.35
+  brake_on_frames: 3
+  brake_off_frames: 5
+  throttle_release_limit: 0.15
+  throttle_release_frames: 10

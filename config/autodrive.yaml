@@ -1,0 +1,52 @@
+# 统一入口配置：根据 MCU 帧 TYPE 切换训练/跟随/自动驾驶模式
+# 使用方式：python main.py --config config/autodrive.yaml
+# 本配置为唯一入口，训练模式、跟随模式、相机、串口均由此配置决定
+
+camera:
+  sensor_id: 0
+  width: 640
+  height: 360
+  fps: 30
+  flip_method: 2
+  capture_width: 1920
+  capture_height: 1080
+
+uart:
+  port: /dev/ttyCH341USB0
+  baudrate: 115200
+  timeout: 0.05
+  max_steer_deg: 37.0
+
+# 训练模式（TYPE=0x01）
+record:
+  fps: 10
+  jpg_quality: 90
+  idle_timeout_sec: 3.0
+  ctrl_skip_threshold: 0.02
+  force_save_sec: 1.0
+
+output:
+  root: data/raw
+
+# 跟随模式（TYPE=0x02）
+infer:
+  device: cuda
+  ckpt: models/best_model.pth   # 模型权重路径，相对项目根目录
+  infer_hz: 10.0
+  send_hz: 20.0
+  frame_stride: 3
+  max_idle_sec: 1.0
+
+postprocess:
+  steer_alpha: 0.3
+  throttle_alpha: 0.2
+  steer_deadband: 0.03
+  max_abs_steer: 0.6
+  max_throttle: 0.8
+  target_valid_threshold: 0.45
+  brake_on_threshold: 0.65
+  brake_off_threshold: 0.35
+  brake_on_frames: 3
+  brake_off_frames: 5
+  throttle_release_limit: 0.8
+  throttle_release_frames: 5

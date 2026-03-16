@@ -1,0 +1,122 @@
+########################
+# 基础 Python 忽略规则 #
+########################
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Type checkers
+.mypy_cache/
+.pyre/
+.pytype/
+cython_debug/
+
+# Editors / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+########################
+# 项目特定忽略规则     #
+########################
+
+# 不提交训练/协议类文档
+TRAINING_PROTOCOL.md
+TRAINING_README.md
+MCU_DOCUMENTATION.md
+
+# 不提交本地命令/脚本
+command.txt
+run_infer.sh
+
+# 工具与辅助脚本目录
+tools/
+
+# 不提交 utils 模块（仅本地使用）
+utils/
+
+########################
+# models 目录           #
+########################
+
+# 不提交模型代码与权重，仅保留占位文件
+models/*
+!models/.gitkeep
+
+########################
+# data 目录             #
+########################
+
+# 忽略 data 下所有内容
+data/**
+
+# 仅保留三个逻辑上的空目录（raw / processed / experiments）
+!data/
+!data/raw/
+!data/processed/
+!data/experiments/
+
+# 这三个目录内部的所有文件与子目录一律忽略
+data/raw/**
+!data/raw/
+
+data/processed/**
+!data/processed/
+
+data/experiments/**
+!data/experiments/
+

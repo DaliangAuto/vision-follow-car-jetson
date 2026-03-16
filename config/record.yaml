@@ -1,0 +1,23 @@
+camera:
+  sensor_id: 0
+  width: 640
+  height: 360
+  fps: 30
+  flip_method: 2   # 0=无 2=旋转180°(镜头颠倒时用)
+
+uart:
+  port: /dev/ttyCH341USB0
+  baudrate: 115200
+  timeout: 0.05   # 二进制帧读取，宜短以便及时响应
+  # max_steer_deg: 37.0   # 转向角归一化范围 ±deg，可选
+
+record:
+  fps: 10
+  jpg_quality: 90
+  idle_timeout_sec: 3.0   # 无串口数据超过此秒数则停止本次采集
+  ctrl_skip_threshold: 0.02   # 刹车/油门/转向变化均小于此值则不保存该帧
+  force_save_sec: 1.0        # 直道巡航时至少每隔此秒数强制保存一帧
+
+output:
+  root: data/raw
+  # run_name: run_test   # 不填则自动用时间戳
